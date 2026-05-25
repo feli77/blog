@@ -1,29 +1,21 @@
 <script lang="ts">
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { onMount } from "svelte";
-import { SvelteMap } from "svelte/reactivity";
 import config from "$config";
 import i18nit from "$i18n";
 
 let { locale }: { locale: string } = $props();
 
-type Locales = (typeof config.i18n.locales)[number];
+let path: string = $state("");
 
-const urls = new SvelteMap<Locales, string>();
-
-function localedURLs() {
-	let links = document.head.querySelectorAll<HTMLAnchorElement>('link[rel="alternate"][hreflang]');
-	links.forEach(link => {
-		let locale = link.getAttribute("hreflang") as Locales;
-		urls.set(locale, link.href);
-	});
-}
+const currentPath = () => (path = window.location.pathname.slice(`/${locale === config.i18n.defaultLocale ? "" : locale}`.length) || "/");
 
 onMount(() => {
-	// Initialize the URLs map
-	localedURLs();
+	// Initialize the current path
+	currentPath();
 
 	/** Register route update hook */
-	const register = () => window.swup?.hooks.on("content:replace", localedURLs);
+	const register = () => window.swup?.hooks.on("content:replace", currentPath);
 
 	// Register the hook immediately if swup is already enabled, otherwise wait for the enable event
 	window.swup ? register() : document.addEventListener("swup:enable", register, { once: true });
@@ -31,5 +23,5 @@ onMount(() => {
 </script>
 
 {#each config.i18n.locales as target}
-	<a data-no-swup href={urls.get(target)} lang={target} aria-current={locale === target ? "page" : undefined} class={locale === target ? "font-bold sm:bg-primary sm:text-background pointer-events-none" : ""}>{i18nit(target)("language")}</a>
+	<a data-no-swup href={getRelativeLocaleUrl(target, path)} lang={target} aria-current={locale === target ? "page" : undefined} class={locale === target ? "font-bold sm:bg-primary sm:text-background pointer-events-none" : ""}>{i18nit(target)("language")}</a>
 {/each}
