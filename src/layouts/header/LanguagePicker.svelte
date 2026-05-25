@@ -4,13 +4,18 @@ import { onMount } from "svelte";
 import config from "$config";
 import i18nit from "$i18n";
 
-let { locale, route }: { locale: string; route: string } = $props();
+let { locale }: { locale: string } = $props();
 
-let path: string | undefined = $derived(route.slice(`/${locale === config.i18n.defaultLocale ? "" : locale}`.length) || undefined);
+let path: string = $state("");
+
+const currentPath = () => (path = window.location.pathname.slice(`/${locale === config.i18n.defaultLocale ? "" : locale}`.length) || "/");
 
 onMount(() => {
+	// Initialize the current path
+	currentPath();
+
 	/** Register route update hook */
-	const register = () => window.swup?.hooks.on("page:load", () => (route = window.location.pathname));
+	const register = () => window.swup?.hooks.on("content:replace", currentPath);
 
 	// Register the hook immediately if swup is already enabled, otherwise wait for the enable event
 	window.swup ? register() : document.addEventListener("swup:enable", register, { once: true });

@@ -1,6 +1,7 @@
 import { ActionError, defineAction } from "astro:actions";
-import { z } from "astro:schema";
+import { z } from "astro/zod";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { env } from "cloudflare:workers";
 import { and, eq, ne } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/d1";
 import { email as enabled } from "$config";
@@ -15,7 +16,7 @@ export const email = {
 	verify: defineAction({
 		input: z.object({
 			locale: z.string(), // locale code for generating the link
-			address: z.string().email().optional() // email address to verify, left empty to resend
+			address: z.email().optional() // email address to verify, left empty to resend
 		}),
 		handler: async ({ locale, address }, { cookies, locals, site }) => {
 			// Check if email feature is enabled
@@ -26,11 +27,11 @@ export const email = {
 			if (!drifter) throw new ActionError({ code: "UNAUTHORIZED" });
 
 			// Apply rate limiting to prevent spam
-			const { success } = await locals.runtime.env.EMAIL_LIMIT.limit({ key: drifter });
+			const { success } = await env.EMAIL_LIMIT.limit({ key: drifter });
 			if (!success) throw new ActionError({ code: "TOO_MANY_REQUESTS" });
 
 			// Initialize database connection
-			const db = drizzle(locals.runtime.env.DB);
+			const db = drizzle(env.DB);
 
 			if (address) {
 				// Insert or update email record with pending state
@@ -94,7 +95,7 @@ export const email = {
 
 	// Action to remove email record
 	remove: defineAction({
-		handler: async (_, { cookies, locals }) => {
+		handler: async (_, { cookies }) => {
 			// Check if email feature is enabled
 			if (!enabled) throw new ActionError({ code: "FORBIDDEN" });
 
@@ -103,7 +104,7 @@ export const email = {
 			if (!drifter) throw new ActionError({ code: "UNAUTHORIZED" });
 
 			// Initialize database connection
-			const db = drizzle(locals.runtime.env.DB);
+			const db = drizzle(env.DB);
 
 			// Remove email record
 			await db.delete(Email).where(eq(Email.drifter, drifter));

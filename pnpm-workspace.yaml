@@ -1,5 +1,5 @@
-onlyBuiltDependencies:
-  - esbuild
-  - sharp
-  - swup
-  - workerd
+allowBuilds:
+  esbuild: true
+  sharp: true
+  swup: true
+  workerd: true

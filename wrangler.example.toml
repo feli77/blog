@@ -1,6 +1,6 @@
 name = "$PROJECT_NAME"
 main = "./dist/_worker.js/index.js"
-compatibility_date = "2025-06-30"
+compatibility_date = "2026-05-07"
 compatibility_flags = ["nodejs_compat"]
 
 [assets]

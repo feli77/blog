@@ -1,5 +1,6 @@
 import { ActionError, defineAction } from "astro:actions";
-import { z } from "astro:schema";
+import { z } from "astro/zod";
+import { env } from "cloudflare:workers";
 import { eq, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/d1";
 import { OAuth, type OAuthAccount } from "$lib/oauth";
@@ -10,7 +11,7 @@ import { oauth } from "$config";
 export const drifter = {
 	// Action to retrieve the current user's profile information
 	profile: defineAction({
-		handler: async (_, { cookies, locals }) => {
+		handler: async (_, { cookies }) => {
 			// Verify user authentication
 			const id = (await Token.check(cookies, "passport"))?.visa;
 			if (!id) return;
@@ -22,7 +23,7 @@ export const drifter = {
 			}
 
 			// Initialize database connection
-			const db = drizzle(locals.runtime.env.DB);
+			const db = drizzle(env.DB);
 
 			// Fetch user profile data from database
 			const drifter = await db
@@ -48,13 +49,13 @@ export const drifter = {
 
 	// Action to synchronize user profile with OAuth provider
 	synchronize: defineAction({
-		handler: async (_, { cookies, locals }) => {
+		handler: async (_, { cookies }) => {
 			// Verify user authentication
 			const id = (await Token.check(cookies, "passport"))?.visa;
 			if (!id) throw new ActionError({ code: "UNAUTHORIZED" });
 
 			// Initialize database connection
-			const db = drizzle(locals.runtime.env.DB);
+			const db = drizzle(env.DB);
 
 			// Get current OAuth tokens and provider info
 			const drifter = await db
@@ -100,13 +101,13 @@ export const drifter = {
 			homepage: z.string().nullish(), // User's personal homepage URL
 			notify: z.boolean().nullish() // Whether to notify user via email
 		}),
-		handler: async ({ homepage, notify }, { cookies, locals }) => {
+		handler: async ({ homepage, notify }, { cookies }) => {
 			// Verify user authentication
 			const id = (await Token.check(cookies, "passport"))?.visa;
 			if (!id) throw new ActionError({ code: "UNAUTHORIZED" });
 
 			// Initialize database connection
-			const db = drizzle(locals.runtime.env.DB);
+			const db = drizzle(env.DB);
 
 			// Update user settings in database
 			await db.update(Drifter).set({ homepage }).where(eq(Drifter.id, id));
@@ -118,13 +119,13 @@ export const drifter = {
 
 	// Action to deactivate user account and clean up all data
 	deactivate: defineAction({
-		handler: async (_, { cookies, locals }) => {
+		handler: async (_, { cookies }) => {
 			// Verify user authentication
 			const id = (await Token.check(cookies, "passport"))?.visa;
 			if (!id) throw new ActionError({ code: "UNAUTHORIZED" });
 
 			// Initialize database connection
-			const db = drizzle(locals.runtime.env.DB);
+			const db = drizzle(env.DB);
 
 			// Get user's OAuth provider and access token for revocation
 			const drifter = await db.select({ provider: Drifter.provider, access: Drifter.access }).from(Drifter).where(eq(Drifter.id, id)).get();

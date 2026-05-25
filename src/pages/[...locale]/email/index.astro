@@ -1,4 +1,5 @@
 ---
+import { env } from "cloudflare:workers";
 import { and, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/d1";
 import config from "$config";
@@ -33,7 +34,7 @@ async function validate(ticket: string) {
 	if (!claim) return t("email.verify.invalid");
 
 	// Initialize database connection
-	const db = drizzle(Astro.locals.runtime.env.DB);
+	const db = drizzle(env.DB);
 
 	// Parse drifter and address from claim
 	const timestamp = new DataView(claim.buffer).getBigUint64(0, false);

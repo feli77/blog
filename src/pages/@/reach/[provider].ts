@@ -26,7 +26,7 @@ export const GET: APIRoute = async ({ cookies, params, url, locals, redirect, re
 		// Exchange authorization code for user account information
 		const user: OAuthAccount = await new OAuth(provider).validate(code, escort.codeVerifier);
 
-		const db = drizzle(locals.runtime.env.DB);
+		const db = drizzle(env.DB);
 		// Insert or update user account in database with conflict resolution
 		const drifter = await db
 			.insert(Drifter)
