@@ -16,15 +16,15 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Setup pnpm
-      uses: pnpm/action-setup@v4
+      uses: pnpm/action-setup@v6
       with:
         run_install: false
 
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         node-version: '24'
         cache: 'pnpm'
@@ -43,8 +43,14 @@ jobs:
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
 
-    - name: Font Cache
-      uses: actions/cache@v3
+    - name: Cache Astro Fonts
+      uses: actions/cache@v5
+      with:
+        path: .astro/fonts
+        key: astro-fonts-cache-v1
+
+    - name: Cache OG Fonts
+      uses: actions/cache@v5
       with:
         path: node_modules/.cache/og-fonts
         key: og-fonts-cache-v1
@@ -53,14 +59,14 @@ jobs:
       run: pnpm run build
 
     - name: Run database migrations
-      uses: cloudflare/wrangler-action@v3
+      uses: cloudflare/wrangler-action@v4
       with:
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         command: d1 migrations apply DB --remote
 
     - name: Deploy to Cloudflare Workers
-      uses: cloudflare/wrangler-action@v3
+      uses: cloudflare/wrangler-action@v4
       with:
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
