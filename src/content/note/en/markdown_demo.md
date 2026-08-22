@@ -37,13 +37,7 @@ draft: false
   }
 }
 </style>
-## How to use this guide
-
-This guide moves from basic syntax to theme extensions. Each feature shows copyable Markdown first, followed by its rendered result.
-
-Astro processes Markdown with [remark](https://github.com/remarkjs/remark). This site configures additional remark and rehype plugins in `astro.config.ts`; their roles are summarized under [Theme extensions](#theme-extensions).
-
-## Basic syntax
+## Basics
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing.
 
@@ -271,7 +265,7 @@ Preview:
 
 Other Markdown syntax can also be nested inside blockquotes.
 
-## Theme extensions
+## Extensions
 
 The following features are provided by plugins configured by the theme:
 
