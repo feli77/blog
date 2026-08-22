@@ -130,6 +130,14 @@ export default defineConfig({
 			cssVariable: "--font-noto-serif-sc"
 		},
 		{
+			name: "Noto Serif TC",
+			provider: fontProviders.google(),
+			weights: [400, 700],
+			optimizedFallbacks: false,
+			fallbacks: ["Noto Serif TC", "Source Han Serif TC", "Songti TC", "PMingLiU", "serif"],
+			cssVariable: "--font-noto-serif-tc"
+		},
+		{
 			name: "Noto Serif JP",
 			provider: fontProviders.google(),
 			weights: [400, 700],

@@ -18,7 +18,7 @@ const config = siteConfig({
 	},
 	timezone: "UTC",
 	i18n: {
-		locales: ["en", "zh-cn", "ja"],
+		locales: ["en", "zh-cn", "zh-tw", "ja"],
 		defaultLocale: "zh-cn"
 	},
 	pagination: {

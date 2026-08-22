@@ -1,0 +1,30 @@
+comment:
+  html:
+    button: 點擊前往共織靈光
+    comment: '{name} 說道：'
+    greeting: 嗨，{name}！
+    notify: 「{content}」下，正有新聲悄然落筆。
+  subject: 新聲悄至，文下有言
+  text: |-
+    「{content}」下，正有新聲悄然落筆：{comment}
+    共織靈光：{link}
+policy: 政策
+reply:
+  html:
+    button: 點擊回溯交流軌跡
+    greeting: 嗨，{name}！
+    notify: 您在「{content}」下的想法激起了回響。
+    reply: '{name} 回覆：'
+    yours: 您的想法：
+  subject: 片語有聲，回響已至
+  text: |-
+    您在「{content}」下的想法激起了回響：{reply}
+    交流軌跡：{link}
+unsubscribe: 取消訂閱
+verification:
+  html:
+    button: 確認電子郵件
+    instruction: 點擊下方按鈕以完成電子郵件驗證：
+    title: 確認您的電子郵件
+  subject: 確認您的電子郵件
+  text: 請點擊連結完成電子郵件驗證：{link}

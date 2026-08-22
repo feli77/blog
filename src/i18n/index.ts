@@ -7,6 +7,10 @@ import zhCN from "./zh-cn/index.yaml";
 import zhCNScript from "./zh-cn/script.yaml";
 import zhCNLinkroll from "./zh-cn/linkroll.yaml";
 import zhCNEmail from "./zh-cn/email.yaml";
+import zhTW from "./zh-tw/index.yaml";
+import zhTWScript from "./zh-tw/script.yaml";
+import zhTWLinkroll from "./zh-tw/linkroll.yaml";
+import zhTWEmail from "./zh-tw/email.yaml";
 import ja from "./ja/index.yaml";
 import jaScript from "./ja/script.yaml";
 import jaLinkroll from "./ja/linkroll.yaml";
@@ -25,6 +29,12 @@ const translations = {
 		script: zhCNScript,
 		linkroll: zhCNLinkroll,
 		email: zhCNEmail
+	},
+	"zh-tw": {
+		index: zhTW,
+		script: zhTWScript,
+		linkroll: zhTWLinkroll,
+		email: zhTWEmail
 	},
 	ja: {
 		index: ja,

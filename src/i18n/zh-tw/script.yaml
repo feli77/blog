@@ -1,0 +1,58 @@
+new:
+  article:
+    start: |-
+      ## 開始寫作
+
+      在此開始你的創作……
+  cancel: 操作中斷
+  created: 檔案建立成功！
+  creating: 正在建立檔案...
+  done: 完成！寫作愉快！
+  error: 發生錯誤
+  jotting:
+    description: 簡短的見解、零散的思考或日常觀察
+    name: 隨筆
+  note:
+    description: 具有深度、經過深思熟慮的長篇作品
+    name: 文記
+  open:
+    error: 無法開啟 VS Code
+    message: 使用 VS Code 開啟此檔案？
+  preface:
+    description: 生活近況、網站公告或創作理念
+    name: 序文
+    start: 在此開始你的創作……
+  preview: 這是將在 {path} 建立的內容
+  step:
+    confirm: 確認建立此檔案？
+    description:
+      name: 描述（選填）
+      placeholder: 內容的簡要說明...
+    id:
+      name: 內容 ID（檔名）
+      placeholder: 輸入內容 ID…
+      validate: 內容 ID 只能包含字母、數字和連字號，且不能以連字號開頭或結尾。
+    language: 選擇語言
+    options:
+      draft: 標記為草稿
+      name: 選擇附加選項
+      sensitive: 標記為敏感內容
+      toc: 顯示目錄
+      top: 置頂內容
+    overwrite: 檔案 {path} 已存在，是否覆寫？
+    series:
+      name: 所屬系列（選填）
+      placeholder: 如果不屬於任何系列，請略過
+    structure:
+      flat: 單一 Markdown 檔案
+      folder: 含索引檔案的資料夾（用於放置圖片）
+      name: 您想使用哪種檔案結構？
+    tags:
+      name: 標籤（半形逗號分隔，選填）
+      placeholder: 例如：Guide, Astro, Tutorial
+    title:
+      name: 文章標題
+      placeholder: 輸入標題…
+      validate: 標題不能為空
+    type: 選擇內容類型
+  welcome: 建立新文章

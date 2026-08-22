@@ -1,0 +1,172 @@
+about:
+  introduction: 我是...
+  linkroll: 友鏈
+cancel: 取消
+comment:
+  author: 筆者
+  collapse: 合上筆談
+  disabled: 想法已封存，暫不新增
+  edit:
+    history: 編輯歷史
+    name: 編輯
+  empty: 想法內容為空
+  expand: 展開思緒
+  failure: 抱歉，想法未能送達
+  fetch:
+    failure: 取得想法時發生錯誤
+  history: 歷史
+  limit: 發表過於頻繁
+  name: 想法
+  nickname:
+    empty: 暱稱不能為空
+    name: 暱稱
+  overlength: |
+    想法過長
+    可於回覆中續寫
+  placeholder: 於此留下想法
+  preview:
+    empty: 等待您的 Markdown 靈感
+    name: Markdown 預覽
+  reload:
+    increase: 取得新的想法！
+    name: 重新整理想法
+    same: 暫無新的想法
+  remove:
+    failure: 刪除想法失敗
+    name: 刪除想法
+    success: 想法已成功刪除
+  removed: 想法已刪除
+  reply: 回覆
+  share:
+    name: 分享
+    success: 連結已複製
+  signin: 登入以傳遞想法
+  sort:
+    asc: 時間升冪
+    desc: 時間降冪
+  submit: 發表
+  success: 想法已送達
+  time: 傳送時間
+  verify:
+    failure: 人機驗證失敗
+    progress: 正在自動進行人機驗證
+confirm: 確認
+contents: 目錄
+delete: 刪除
+drifter:
+  deactivate:
+    cancel: 繼續駐足
+    confirm: 確認停用帳號
+    consequences:
+      comment: 無法再使用目前帳號發表想法
+      comments: 所有想法都將保留，但會匿名化處理
+      data: 所有個人資訊都將被清除
+      new: 重新授權登入將建立全新帳號
+      notification: 無法再接收電子郵件通知
+    description: 若確認停用，您的帳號將會：
+    done: 歸隱旅人
+    failure: 停用帳號失敗
+    name: 停用帳號
+    success: 帳號已停用
+    title: 您確定要停用帳號嗎？
+    warning: 此操作無法復原！
+  fetch:
+    failure: 取得旅人檔案時發生錯誤
+  homepage: 個人首頁
+  profile: 旅人檔案
+  signin: 登入
+  signout: 登出
+  sync:
+    failure: 同步失敗
+    fetch: 資訊同步中
+    name: 同步
+    success: 同步成功
+  update:
+    failure: 更新失敗
+    name: 更新
+    success: 更新成功
+email:
+  empty: 電子郵件地址不能為空
+  name: 電子郵件
+  notify: 電子郵件通知
+  remove:
+    failure: 電子郵件刪除失敗
+    name: 刪除電子郵件
+    success: 電子郵件已成功刪除
+  unsubscribe:
+    invalid: 取消訂閱連結無效
+    success: 您已成功取消訂閱！
+  verify:
+    already: 您已完成驗證
+    conflict: 與舊電子郵件地址相同
+    done: 電子郵件已驗證
+    expired: 驗證連結已過期
+    invalid: 驗證連結無效
+    limit: 請稍後再試
+    resend: 重新傳送驗證郵件
+    send:
+      failure: 無法傳送驗證郵件
+      success: 驗證郵件已傳送，連結將於 5 分鐘後失效，請儘快查收
+    success: 電子郵件驗證成功！
+home:
+  heatmap:
+    empty: 無字
+    jotting:
+      other: 隨筆 {count} 則
+    note:
+      other: 文記 {count} 篇
+  latest: 最新內容
+  prefaces: 序文一覽
+jotting:
+  empty: 暫無隨筆
+  tag: 標籤
+language: 繁體中文
+navigation:
+  about: 關於
+  email: 電子郵件
+  home: 營火
+  jotting: 隨筆
+  note: 文記
+  policy: 政策
+  preface: 序文
+note:
+  comment: 前往想法
+  empty: 暫無文記
+  series: 系列
+  tag: 標籤
+  top: 回到頂端
+oauth:
+  benefit:
+    captcha: 無需進行人機驗證
+    comment: 編輯和刪除自己的想法
+    homepage: 展示自己的個人首頁
+    notification: 接收想法回覆的電子郵件通知
+  signin: 使用 {provider} 登入
+push:
+  denied: 您已拒絕桌面通知權限
+  disable:
+    name: 桌面通知已停用
+    success: 桌面通知已停用
+  enable:
+    failure: 桌面通知啟用失敗
+    name: 桌面通知已啟用
+    success: 桌面通知已啟用
+  reply:
+    body: 點擊回溯交流軌跡
+    title: 片語有聲，回響已至
+read:
+  words:
+    other: '{count} 字'
+sensitive:
+  back: 返回列表
+  continue: 我已知悉，繼續閱讀
+  description: 本文可能包含色情、暴力、血腥或情緒觸發內容。
+  feed: |
+    <p>本文可能包含色情、暴力、血腥或情緒觸發內容。</p>
+    <p>如需閱讀，請前往<a href="{link}">原文連結</a>。</p>
+  icon: 包含敏感內容
+  title: 內容警告
+  warning: 若這些內容可能影響您的心理健康，請立即離開！
+statistics:
+  other: 寫下 {count} 字
+theme: '主題: ThoughtLite'

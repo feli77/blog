@@ -1,0 +1,21 @@
+import Linkroll from "$components/Linkroll.astro";
+
+export const links = [
+    {
+        title: "記緒漂流",
+        url: "https://ttio.cc",
+        image: "https://ttio.cc/favicon.svg",
+        description: "於記憶之川，泛思緒之舟。",
+        type: "lifestyle"
+    },
+    {
+        title: "紙鹿摸魚處",
+        url: "https://blog.zhilu.site/",
+        image: "https://www.zhilu.site/api/avatar.png",
+        description: "紙鹿至麓不知路，支爐製露不止漉",
+        type: "technology"
+    },
+];
+
+<Linkroll locale={props.locale} links={links} />
+
