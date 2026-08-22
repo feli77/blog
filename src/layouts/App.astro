@@ -13,7 +13,9 @@ const mainFonts: Record<string, CssVariable> = {
 	ja: "--font-noto-serif-jp"
 };
 
-const localedMainFont = mainFonts[locale];
+const languageFontStyles = Object.entries(mainFonts)
+	.map(([language, font]) => `[lang="${language}"]{--font-serif:var(${font});font-family:var(--font-serif),var(--font-mono)}`)
+	.join("");
 
 const route = Astro.url.pathname.slice(`/${locale === config.i18n.defaultLocale ? "" : locale}`.length);
 ---
@@ -63,9 +65,9 @@ const route = Astro.url.pathname.slice(`/${locale === config.i18n.defaultLocale 
 		<Font cssVariable="--font-playwrite-mx" />
 		<Font cssVariable="--font-the-peak-font-plus" />
 		<Font cssVariable="--font-maple-mono-nf-cn" />
-		<Font cssVariable={localedMainFont} />
+		{Object.values(mainFonts).map(cssVariable => <Font {cssVariable} />)}
 
-		<style set:html={`[lang="${locale}"]{--font-serif:var(${localedMainFont})}`}></style>
+		<style set:html={languageFontStyles}></style>
 
 		{config.i18n.locales.map(locale => <link rel="alternate" hreflang={locale} href={getAbsoluteLocaleUrl(locale, route)} />)}
 
