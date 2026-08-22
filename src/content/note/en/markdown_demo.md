@@ -1,8 +1,8 @@
 ---
-title: Markdown Demo
+title: Markdown Guide and Demo
 timestamp: 2025-11-22 18:57:15+08:00
 tags: [Markdown]
-description: Demonstrate the Markdown features used on this site and their rendering effects
+description: A practical guide to the Markdown syntax and theme extensions supported by this site
 toc: true
 draft: false
 ---
@@ -37,7 +37,13 @@ draft: false
   }
 }
 </style>
-## Basic Markdown syntax
+## How to use this guide
+
+This guide moves from basic syntax to theme extensions. Each feature shows copyable Markdown first, followed by its rendered result.
+
+Astro processes Markdown with [remark](https://github.com/remarkjs/remark). This site configures additional remark and rehype plugins in `astro.config.ts`; their roles are summarized under [Theme extensions](#theme-extensions).
+
+## Basic syntax
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing.
 
@@ -59,9 +65,9 @@ When there is a lot of content in an article, you can use headings to divide it:
 ###### H6
 ```
 
-Title preview will disrupt the structure of the article, so it is not displayed here.
+Rendering all six headings here would disrupt the article hierarchy, so this example is shown only as source.
 
-### Bold Italic
+### Emphasis
 
 ```markdown
 *Italic Text*
@@ -79,7 +85,7 @@ Preview:
 
 ***Italic bold text***
 
-### Link
+### Links
 
 ```markdown
 Text link [Link name](https://feli77.com)
@@ -92,14 +98,14 @@ Text link [Link name](https://feli77.com)
 ### Inline code
 
 ```markdown
-This is a `inline code`
+This contains `inline code`.
 ```
 
 Preview:
 
-This is a `inline code`
+This contains `inline code`.
 
-### Code block
+### Code blocks and highlighting
 
 Preview: 
 
@@ -116,19 +122,19 @@ inline int read()
 ```
 
 
-Currently using shiki as the code highlight plugin, supported languages can be referred to at [shiki / languages](https://shiki.matsu.io/languages.html).
+This site uses Shiki for syntax highlighting. See [Shiki / Languages](https://shiki.matsu.io/languages.html) for the supported languages.
 
-### Inline formula
+### Inline math
 
 ```latex
-This is an inline formula $e^{i\pi} + 1 = 0$
+This is inline math: $e^{i\pi} + 1 = 0$
 ```
 
 Preview:
 
-This is an inline formula $e^{i\pi} + 1 = 0$
+This is inline math: $e^{i\pi} + 1 = 0$
 
-### Formula block
+### Display math
 
 ```latex
 $$
@@ -142,9 +148,9 @@ $$
 \hat{f}(\xi) = \int_{-\infty}^{\infty} f(x) e^{-2\pi i x \xi} \, dx
 $$
 
-Currently using KaTeX as the mathematical formula plugin, please refer to [KaTeX Supported Functions](https://katex.org/docs/supported.html) for supported syntax.
+This site renders mathematics with KaTeX. See [KaTeX Supported Functions](https://katex.org/docs/supported.html) for the supported syntax.
 
-### Image
+### Images
 
 ```markdown
 ![Pink Floyd](https://www.helloimg.com/i/2025/11/22/69219d393cdb1.jpg)
@@ -164,9 +170,9 @@ Preview:
 
 ~~Strikethrough~~
 
-### Separator
+### Horizontal rules
 
-If you are in the habit of writing separators, you can start a new line and input three dashes `---` or asterisks `***`. When there are paragraphs before and after, please leave a blank line:
+Start a horizontal rule on its own line with three hyphens `---` or asterisks `***`. Leave a blank line before and after it when surrounded by paragraphs:
 
 ```markdown
 ---
@@ -176,7 +182,7 @@ Preview:
 
 * * *
 
-### List
+### Lists
 
 Bulleted list
 
@@ -214,44 +220,44 @@ Preview:
 2.  The Wall
 3.  Wish You Were Here
 
-The list can continue to nest syntax
+Other Markdown syntax can be nested inside list items.
 
-### Notes
+### Footnotes
 
 ```markdown
-Use [^1] to add notes where referenced.
+Use [^1] to add a footnote at the point of reference.
 
-Then, add the note content at the end of the document (it will be rendered by default at the end of the article).
+Then add the footnote definition later in the document; it is rendered at the end of the article.
 
-[^1]: This is the note content.
+[^1]: Footnotes **can contain Markdown**.
 
-Can also use inline comments^[Here is the content of the inline comment] 
+Inline footnotes are also supported^[This is an inline footnote].
 
 ```
 
 Preview:
 
-Use [^1] to add notes where referenced.
+Use [^1] to add a footnote at the point of reference.
 
-Then, add the note content at the end of the document (it will be rendered by default at the end of the article).
+Then add the footnote definition later in the document; it is rendered at the end of the article.
 
-[^1]: This is the note content.
+[^1]: Footnotes **can contain Markdown**.
 
-Can also use inline comments^[Here is the content of the inline comment]
+Inline footnotes are also supported^[This is an inline footnote].
 
-### To-Do list
+### Task lists
 
 ```markdown
 - [ ] Unfinished tasks
-- [x] Completed Tasks
+- [x] Completed tasks
 ```
 
 Preview:
 
 - [ ] Unfinished tasks
-- [x] Completed Tasks
+- [x] Completed tasks
 
-### Citations
+### Blockquotes
 
 ```markdown
 > No one told you when to run
@@ -263,11 +269,27 @@ Preview:
 > No one told you when to run
 > You missed the starting gun.
 
-Nested syntax can also continue within quotes.
+Other Markdown syntax can also be nested inside blockquotes.
 
-## Extended features
+## Theme extensions
 
-### Insert
+The following features are provided by plugins configured by the theme:
+
+| Feature | Implementation |
+| - | - |
+| Insertion | [`remark-ins`](https://www.npmjs.com/package/remark-ins) |
+| Marking | [`remark-flexible-markers`](https://www.npmjs.com/package/remark-flexible-markers) |
+| Ruby | [`@tuyuritio/remark-ruby`](https://www.npmjs.com/package/@tuyuritio/remark-ruby) |
+| Spoilers | [`@tuyuritio/remark-spoiler`](https://www.npmjs.com/package/@tuyuritio/remark-spoiler) |
+| Emoji | [`remark-gemoji`](https://www.npmjs.com/package/remark-gemoji) |
+| Mathematics | [`remark-math`](https://www.npmjs.com/package/remark-math) and [`rehype-katex`](https://www.npmjs.com/package/rehype-katex) |
+| Footnotes | [`remark-footnotes-extra`](https://www.npmjs.com/package/remark-footnotes-extra) |
+| Abbreviations | [`@tuyuritio/remark-abbreviation`](https://www.npmjs.com/package/@tuyuritio/remark-abbreviation) |
+| GitHub Alerts | [`@tuyuritio/remark-github-alert`](https://www.npmjs.com/package/@tuyuritio/remark-github-alert) |
+| Extended tables | [`remark-extended-table`](https://www.npmjs.com/package/remark-extended-table) |
+| Element attributes | [`@tuyuritio/remark-attribute`](https://www.npmjs.com/package/@tuyuritio/remark-attribute) |
+
+### Inserted text
 
 ```
 ++Insert Content++
@@ -277,7 +299,7 @@ Preview:
 
 ++Insert Content++
 
-## Mark
+### Marked text
 
 ```
 ==Marked Content==
@@ -287,7 +309,7 @@ Preview:
 
 ==Marked Content==
 
-## Ruby
+### Ruby
 
 ```
 {拼音}(pīn|yīn)
@@ -305,17 +327,33 @@ Preview:
 
 {振り仮名}(ふ||が|な)
 
-### Mask
+### Spoilers
 
 ```
-!!Masked Content!!
+!!Spoiler content!!
 ```
 
 Preview:
 
-!!Masked Content!!
+!!Spoiler content!!
 
-### GitHub Alert
+### Abbreviations
+
+Abbreviations expand only when a complete word is matched:
+
+```markdown
+ABBR abbr xABBRx
+
+*[ABBR]: Abbreviation
+```
+
+Preview:
+
+ABBR abbr xABBRx
+
+*[ABBR]: Abbreviation
+
+### GitHub Alerts
 
 ```markdown
 > [!NOTE]
@@ -369,23 +407,23 @@ Preview:
 > [!NOTE] (･ρ･)ﾉ
 > Custom title text
 
-### Enhance table
+### Extended tables
 
 ```markdown
 | Left-aligned | Centered | Right-aligned | Centered |
-| --- | --- | --- | --- |
-| Normal cell | Merged cell |  | Merge columns |
-| Normal cell | 2x2 Cell |  | ^ |
-| Regular Cell | ^ |  | Regular Cell |
+|:- |:-:| -:| - |
+| Normal cell | Merged cell || Merged column |
+| Normal cell | 2×2 cell ||^|
+| Normal cell | ^ || Normal cell |
 ```
 
 Preview:
 
 | Left-aligned | Centered | Right-aligned | Centered |
-| --- | --- | --- | --- |
-| Normal cell | Merged cell |  | Merge columns |
-| Normal cell | 2x2 Cell |  | ^ |
-| Regular Cell | ^ |  | Regular Cell |
+|:- |:-:| -:| - |
+| Normal cell | Merged cell || Merged column |
+| Normal cell | 2×2 cell ||^|
+| Normal cell | ^ || Normal cell |
 
 ### Emoji
 
@@ -399,7 +437,15 @@ Preview:
 
 [Emoji Quick Reference](https://github.com/ikatyang/emoji-cheat-sheet?tab=readme-ov-file#table-of-contents)
 
-### Inline Element Attribute Extensions
+### Element attributes {#element-attributes}
+
+Headings can define custom anchors, while images and inline elements can receive sizes, class names, or arbitrary attributes:
+
+```markdown
+### Custom heading {#custom-id}
+```
+
+This section heading demonstrates the same feature with the `element-attributes` anchor.
 
 ```markdown
 ![The Wall](https://www.helloimg.com/i/2025/11/24/69246b46b2859.png){width=300}

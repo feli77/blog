@@ -1,8 +1,8 @@
 ---
-title: Markdown デモ
+title: Markdown ガイドとデモ
 timestamp: 2025-11-22 18:57:15+08:00
 tags: [Markdown]
-description: このサイトで使用している Markdown の機能とレンダリング結果を紹介します
+description: このサイトが対応する Markdown の基本構文とテーマ拡張を実例で紹介します
 toc: true
 draft: false
 ---
@@ -38,7 +38,13 @@ draft: false
 }
 </style>
 
-## Markdown の基本構文
+## このガイドの使い方
+
+このガイドでは、基本構文からテーマ拡張までを順に紹介します。各機能について、コピーできる Markdown の書き方と実際のレンダリング結果を掲載しています。
+
+Astro は [remark](https://github.com/remarkjs/remark) で Markdown を処理します。このサイトでは `astro.config.ts` に remark・rehype プラグインを追加しており、それぞれの役割は[テーマ拡張](#テーマ拡張)にまとめています。
+
+## 基本構文
 
 Markdown は、文章にスタイルを付けるための軽量で使いやすい記法です。
 
@@ -62,7 +68,7 @@ Markdown は、文章にスタイルを付けるための軽量で使いやす�
 
 見出しのプレビューは記事の構造を崩すため、ここでは表示しません。
 
-### 太字・斜体
+### 強調
 
 ```markdown
 _斜体テキスト_
@@ -100,7 +106,7 @@ _斜体テキスト_
 
 これは `インラインコード` です
 
-### コードブロック
+### コードブロックとハイライト
 
 プレビュー：
 
@@ -219,29 +225,29 @@ $$
 
 リストの中にほかの構文を入れ子にすることもできます。
 
-### 注釈
+### 脚注
 
 ```markdown
-参照する場所で [^注釈] を使って注釈を追加します。
+参照する場所で [^注釈] を使って脚注を追加します。
 
-次に、文書の末尾へ注釈の内容を追加します（既定では記事の末尾にレンダリングされます）。
+続いて文書内に脚注の定義を追加します。脚注は記事の末尾にレンダリングされます。
 
-[^注釈]: ここに注釈の内容を書きます
+[^注釈]: 脚注には **Markdown も使用できます**。
 
-インライン注釈も使用できます^[ここにインライン注釈の内容を書きます]
+インライン脚注も使用できます^[ここにインライン脚注の内容を書きます]
 ```
 
 プレビュー：
 
-参照する場所で [^1] を使って注釈を追加します。
+参照する場所で [^1] を使って脚注を追加します。
 
-次に、文書の末尾へ注釈の内容を追加します（既定では記事の末尾にレンダリングされます）。
+続いて文書内に脚注の定義を追加します。脚注は記事の末尾にレンダリングされます。
 
-[^1]: ここに注釈の内容を書きます
+[^1]: 脚注には **Markdown も使用できます**。
 
-インライン注釈も使用できます^[ここにインライン注釈の内容を書きます]
+インライン脚注も使用できます^[ここにインライン脚注の内容を書きます]
 
-### To-Do リスト
+### タスクリスト
 
 ```markdown
 - [ ] 未完了のタスク
@@ -253,7 +259,7 @@ $$
 - [ ] 未完了のタスク
 - [x] 完了したタスク
 
-### 引用
+### 引用ブロック
 
 ```markdown
 > No one told you when to run
@@ -267,7 +273,23 @@ $$
 
 引用の中にほかの構文を入れ子にすることもできます。
 
-## 拡張機能
+## テーマ拡張
+
+以下の機能は、テーマに設定されたプラグインによって提供されます：
+
+| 機能 | 実装 |
+| - | - |
+| 挿入 | [`remark-ins`](https://www.npmjs.com/package/remark-ins) |
+| マーカー | [`remark-flexible-markers`](https://www.npmjs.com/package/remark-flexible-markers) |
+| Ruby | [`@tuyuritio/remark-ruby`](https://www.npmjs.com/package/@tuyuritio/remark-ruby) |
+| マスク | [`@tuyuritio/remark-spoiler`](https://www.npmjs.com/package/@tuyuritio/remark-spoiler) |
+| Emoji | [`remark-gemoji`](https://www.npmjs.com/package/remark-gemoji) |
+| 数式 | [`remark-math`](https://www.npmjs.com/package/remark-math) と [`rehype-katex`](https://www.npmjs.com/package/rehype-katex) |
+| 脚注 | [`remark-footnotes-extra`](https://www.npmjs.com/package/remark-footnotes-extra) |
+| 略語 | [`@tuyuritio/remark-abbreviation`](https://www.npmjs.com/package/@tuyuritio/remark-abbreviation) |
+| GitHub Alert | [`@tuyuritio/remark-github-alert`](https://www.npmjs.com/package/@tuyuritio/remark-github-alert) |
+| 拡張テーブル | [`remark-extended-table`](https://www.npmjs.com/package/remark-extended-table) |
+| 要素属性 | [`@tuyuritio/remark-attribute`](https://www.npmjs.com/package/@tuyuritio/remark-attribute) |
 
 ### 挿入
 
@@ -279,7 +301,7 @@ $$
 
 ++挿入する内容++
 
-## マーカー
+### マーカー
 
 ```
 ==マークする内容==
@@ -289,7 +311,7 @@ $$
 
 ==マークする内容==
 
-## Ruby
+### Ruby
 
 ```
 {拼音}(pīn|yīn)
@@ -316,6 +338,22 @@ $$
 プレビュー：
 
 !!隠す内容!!
+
+### 略語
+
+略語は単語全体が一致した場合にのみ展開されます：
+
+```markdown
+ABBR abbr xABBRx
+
+*[ABBR]: Abbreviation
+```
+
+プレビュー：
+
+ABBR abbr xABBRx
+
+*[ABBR]: Abbreviation
 
 ### GitHub Alert
 
@@ -401,7 +439,15 @@ $$
 
 [Emoji クイックリファレンス](https://github.com/ikatyang/emoji-cheat-sheet?tab=readme-ov-file#table-of-contents)
 
-### インライン要素の属性拡張
+### 要素属性 {#element-attributes}
+
+見出しには任意のアンカーを設定でき、画像やインライン要素にはサイズ、クラス名、任意の属性を追加できます：
+
+```markdown
+### カスタム見出し {#custom-id}
+```
+
+この節の見出し自体が、`element-attributes` アンカーを使った例です。
 
 ```markdown
 ![The Wall](https://www.helloimg.com/i/2025/11/24/69246b46b2859.png){width=300}

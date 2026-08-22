@@ -1,8 +1,8 @@
 ---
-title: Markdown演示
+title: Markdown 使用指南
 timestamp: 2025-11-22 18:57:15+08:00
 tags: [Markdown]
-description: 展示本站所用到的Markdown特性以及渲染效果
+description: 从基础语法到主题扩展，展示本站支持的 Markdown 写法及渲染效果
 toc: true
 draft: false
 ---
@@ -40,7 +40,13 @@ draft: false
 </style>
 
 
-## Markdown基础语法
+## 使用说明
+
+本文按照“基础语法 → 主题扩展”的顺序介绍本站支持的 Markdown 功能。每项功能先给出可复制的写法，再展示实际渲染效果。
+
+Astro 使用 [remark](https://github.com/remarkjs/remark) 处理 Markdown；本站在 `astro.config.ts` 中配置了额外的 remark 与 rehype 插件。扩展语法所对应的插件会集中列在[主题扩展](#主题扩展)一节。
+
+## 基础语法
 
 Markdown 是一种轻量级且易于使用的语法，用于为您的写作设计风格。
 
@@ -64,7 +70,7 @@ Markdown 是一种轻量级且易于使用的语法，用于为您的写作设�
 
 标题预览会打乱文章的结构，所以在此不展示。
 
-### 粗斜体
+### 强调
 
 ```markdown
 _斜体文本_
@@ -102,7 +108,7 @@ _斜体文本_
 
 这是一条 `行内代码`
 
-### 代码块
+### 代码块与高亮
 
 预览：
 
@@ -224,29 +230,29 @@ $$
 
 列表里可以继续嵌套语法
 
-### 注释
+### 脚注
 
 ```markdown
-在引用的地方使用 [^脚标] 来添加注释。
+在引用的地方使用 [^脚标] 来添加脚注。
 
-然后在文档的结尾，添加注释的内容（会默认于文章结尾渲染之）。
+然后在文档的结尾添加脚注内容（默认会在文章结尾渲染）。
 
-[^脚标]: 这里是注释的内容
+[^脚标]: 这里是脚注内容，**也可以包含 Markdown**。
 
-也可以使用行内注释^[这里是行内注释的内容] 
+也可以使用行内脚注^[这里是行内脚注的内容]
 ```
 
 预览：
 
-在引用的地方使用 [^1] 来添加注释。
+在引用的地方使用 [^1] 来添加脚注。
 
-然后在文档的结尾，添加注释的内容（会默认于文章结尾渲染之）。
+然后在文档的结尾添加脚注内容（默认会在文章结尾渲染）。
 
-[^1]: 这里是注释的内容
+[^1]: 这里是脚注内容，**也可以包含 Markdown**。
 
-也可以使用行内注释^[这里是行内注释的内容]
+也可以使用行内脚注^[这里是行内脚注的内容]
 
-### To-Do 列表
+### 任务列表
 
 ```markdown
 - [ ] 未完成的任务
@@ -258,7 +264,7 @@ $$
 - [ ] 未完成的任务
 - [x] 已完成的任务
 
-### 引用
+### 引用块
 
 ```markdown
 > No one told you when to run
@@ -272,7 +278,23 @@ $$
 
 引用里也可以继续嵌套语法。
 
-## 扩展功能
+## 主题扩展
+
+以下功能由主题配置的插件提供：
+
+| 功能 | 实现 |
+| - | - |
+| 插入 | [`remark-ins`](https://www.npmjs.com/package/remark-ins) |
+| 标记 | [`remark-flexible-markers`](https://www.npmjs.com/package/remark-flexible-markers) |
+| Ruby | [`@tuyuritio/remark-ruby`](https://www.npmjs.com/package/@tuyuritio/remark-ruby) |
+| 遮罩 | [`@tuyuritio/remark-spoiler`](https://www.npmjs.com/package/@tuyuritio/remark-spoiler) |
+| Emoji | [`remark-gemoji`](https://www.npmjs.com/package/remark-gemoji) |
+| 数学公式 | [`remark-math`](https://www.npmjs.com/package/remark-math) 与 [`rehype-katex`](https://www.npmjs.com/package/rehype-katex) |
+| 脚注 | [`remark-footnotes-extra`](https://www.npmjs.com/package/remark-footnotes-extra) |
+| 缩写 | [`@tuyuritio/remark-abbreviation`](https://www.npmjs.com/package/@tuyuritio/remark-abbreviation) |
+| GitHub Alert | [`@tuyuritio/remark-github-alert`](https://www.npmjs.com/package/@tuyuritio/remark-github-alert) |
+| 增强表格 | [`remark-extended-table`](https://www.npmjs.com/package/remark-extended-table) |
+| 元素属性 | [`@tuyuritio/remark-attribute`](https://www.npmjs.com/package/@tuyuritio/remark-attribute) |
 
 ### 插入
 
@@ -284,7 +306,7 @@ $$
 
 ++插入内容++
 
-## 标记
+### 标记
 
 ```
 ==标记内容==
@@ -294,7 +316,7 @@ $$
 
 ==标记内容==
 
-## Ruby
+### Ruby
 
 ```
 {拼音}(pīn|yīn)
@@ -322,6 +344,22 @@ $$
 
 !!遮罩内容!!
 
+### 缩写
+
+缩写只会在完整单词匹配时展开：
+
+```markdown
+ABBR abbr xABBRx
+
+*[ABBR]: Abbreviation
+```
+
+预览：
+
+ABBR abbr xABBRx
+
+*[ABBR]: Abbreviation
+
 ### GitHub Alert
 
 ```markdown
@@ -331,8 +369,7 @@ $$
 预览：
 
 > [!NOTE]
-  
-普通信息
+> 普通信息
 
 提示信息可以多层嵌套
 
@@ -406,7 +443,15 @@ $$
 
 [Emoji 速查表](https://github.com/ikatyang/emoji-cheat-sheet?tab=readme-ov-file#table-of-contents)
 
-### 内联元素属性扩展
+### 元素属性 {#element-attributes}
+
+标题可以设置自定义锚点；图片、强调等行内元素可以添加尺寸、类名或任意属性：
+
+```markdown
+### 自定义标题 {#custom-id}
+```
+
+本小节标题本身就使用了自定义锚点 `element-attributes`。
 
 ```markdown
 ![The Wall](https://www.helloimg.com/i/2025/11/24/69246b46b2859.png){width=300}
