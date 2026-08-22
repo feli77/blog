@@ -14,6 +14,9 @@ comment:
   failure: 申し訳ありませんが、感想を送信できませんでした
   fetch:
     failure: 感想取得に失敗しました
+  filter:
+    all: すべての言語の感想を表示
+    current: 現在の言語の感想のみ表示
   history: 履歴
   limit: 投稿が頻繁すぎます
   name: 感想

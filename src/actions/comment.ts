@@ -2,11 +2,11 @@ import { ActionError, defineAction } from "astro:actions";
 import { getEntry } from "astro:content";
 import { z } from "astro/zod";
 import { env } from "cloudflare:workers";
-import { and, eq, isNull, lt, ne, or, sql } from "drizzle-orm";
+import { and, eq, inArray, isNull, lt, ne, or, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/d1";
 import { alias } from "drizzle-orm/sqlite-core";
 import { Comment, CommentHistory, Drifter, Email, Notification, PushSubscription } from "$db/schema";
-import config, { turnstile, oauth, push, email } from "$config";
+import config, { turnstile, oauth, push, email, monolocale } from "$config";
 import remark from "$lib/remark";
 import { enhash, Token } from "$lib/token";
 import { render } from "$lib/email";
@@ -15,6 +15,22 @@ import sendPush from "$lib/push";
 import i18nit from "$i18n";
 
 const ENV = import.meta.env;
+
+/** Get the language-independent content path used to find translated comment threads. */
+function normalizeCommentItem(item: string): string {
+	if (monolocale) return item;
+
+	const [locale, ...id] = item.split("/");
+	return config.i18n.locales.some(language => language === locale) && id.length ? id.join("/") : item;
+}
+
+/** Build every translated item key plus the language-independent fallback. */
+function commentItemAliases(item: string): string[] {
+	const normalized = normalizeCommentItem(item);
+	if (monolocale) return [normalized];
+
+	return [normalized, ...config.i18n.locales.map(locale => `${locale}/${normalized}`)];
+}
 
 export const comment = {
 	// Action to create a new comment or edit an existing one
@@ -341,9 +357,10 @@ export const comment = {
 	list: defineAction({
 		input: z.object({
 			section: z.string(), // The section this comment belongs to
-			item: z.string() // The item ID to get comments for
+			item: z.string(), // The item ID to get comments for
+			currentLocaleOnly: z.boolean().optional() // Whether to limit results to the current translation
 		}),
-		handler: async ({ section, item }) => {
+		handler: async ({ section, item, currentLocaleOnly = false }) => {
 			// Get the site author ID
 			const author = ENV.AUTHOR_ID ?? null;
 
@@ -375,7 +392,9 @@ export const comment = {
 				})
 				.from(Comment)
 				.leftJoin(Drifter, eq(Comment.drifter, Drifter.id))
-				.where(and(eq(Comment.section, section), eq(Comment.item, item)))
+				.where(
+					and(eq(Comment.section, section), currentLocaleOnly ? eq(Comment.item, item) : inArray(Comment.item, commentItemAliases(item)))
+				)
 				.orderBy(Comment.timestamp);
 
 			type CommentItem = (typeof comments)[number] & { subcomments: CommentItem[] };
@@ -392,11 +411,12 @@ export const comment = {
 			// Organize comments into tree structure
 			comments.forEach(comment => {
 				const item = map.get(comment.id)!;
-				if (comment.reply) {
-					// This is a reply, add to parent's subcomments
-					map.get(comment.reply)?.subcomments.push(item);
+				const parent = comment.reply ? map.get(comment.reply) : undefined;
+				if (parent) {
+					// This is a reply whose parent is included in the current result set
+					parent.subcomments.push(item);
 				} else {
-					// This is a top-level comment
+					// Keep top-level comments and replies whose parent was removed by filtering
 					treeification.push(item);
 				}
 			});

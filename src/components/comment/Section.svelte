@@ -18,6 +18,7 @@ let {
 	turnstile,
 	push,
 	email,
+	multilingual,
 	compact = false
 }: {
 	locale: string;
@@ -28,6 +29,7 @@ let {
 	turnstile?: string;
 	push?: string;
 	email: boolean;
+	multilingual: boolean;
 	compact?: boolean;
 } = $props();
 
@@ -45,6 +47,8 @@ let expanded: boolean = $state(!compact);
 let count: number = $state(0);
 let comments: CommentItem[] = $state([]);
 let ascending: boolean = $state(false);
+let currentLocaleOnly: boolean = $state(false);
+let filtering: boolean = $state(false);
 let list: CommentItem[] = $derived(ascending ? comments : [...comments].reverse());
 
 /**
@@ -52,7 +56,7 @@ let list: CommentItem[] = $derived(ascending ? comments : [...comments].reverse(
  * @param auto - Whether this is an automatic refresh (default true)
  */
 async function refresh(auto: boolean = true) {
-	const { data, error } = await actions.comment.list({ section, item });
+	const { data, error } = await actions.comment.list({ section, item, currentLocaleOnly });
 	if (!error) {
 		if (!auto) {
 			if (data.count > count) {
@@ -67,6 +71,15 @@ async function refresh(auto: boolean = true) {
 	} else {
 		pushTip("error", t("comment.fetch.failure"));
 	}
+}
+
+async function toggleLocaleFilter() {
+	if (filtering) return;
+
+	currentLocaleOnly = !currentLocaleOnly;
+	filtering = true;
+	await refresh();
+	filtering = false;
 }
 
 onMount(async () => {
@@ -84,7 +97,7 @@ onMount(async () => {
 	}
 
 	// Initial load of comments
-	const { data: commentList, error: commentError } = await actions.comment.list({ section, item });
+	const { data: commentList, error: commentError } = await actions.comment.list({ section, item, currentLocaleOnly });
 	if (!commentError) {
 		count = commentList.count;
 		comments = commentList.treeification;
@@ -120,7 +133,7 @@ onMount(async () => {
 	{/if}
 
 	{#if loaded}
-		{#if compact || comments.length}
+		{#if compact || comments.length || currentLocaleOnly}
 			<div class="flex items-center justify-between mt-6">
 				<p class="flex items-center gap-2"><b>{t("comment.name")}</b> · {count}</p>
 
@@ -135,6 +148,11 @@ onMount(async () => {
 				{/if}
 
 				<p class="flex gap-4">
+					{#if multilingual}
+						<button disabled={filtering} aria-pressed={currentLocaleOnly} onclick={toggleLocaleFilter} class:text-accent={currentLocaleOnly} class="transition-colors">
+							<Icon name="lucide--languages" title={t(currentLocaleOnly ? "comment.filter.all" : "comment.filter.current")} />
+						</button>
+					{/if}
 					<button onclick={() => refresh(false)}><Icon name="lucide--refresh-cw" title={t("comment.reload.name")} /></button>
 					<button onclick={() => (ascending = !ascending)}>
 						{#if ascending}

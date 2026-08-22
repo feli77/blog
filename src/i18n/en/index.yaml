@@ -14,6 +14,9 @@ comment:
   failure: Sorry, your thoughts couldn't be sent
   fetch:
     failure: Error loading thoughts
+  filter:
+    all: Show thoughts in all languages
+    current: Show thoughts in the current language only
   history: History
   limit: Post too frequently
   name: Thoughts

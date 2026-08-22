@@ -14,6 +14,9 @@ comment:
   failure: 抱歉，想法未能送达
   fetch:
     failure: 获取想法出错
+  filter:
+    all: 显示所有语言的想法
+    current: 仅显示当前语言的想法
   history: 历史
   limit: 发表过于频繁
   name: 想法
