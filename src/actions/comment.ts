@@ -1,6 +1,7 @@
 import { ActionError, defineAction } from "astro:actions";
 import { getEntry } from "astro:content";
-import { z } from "astro:schema";
+import { z } from "astro/zod";
+import { env } from "cloudflare:workers";
 import { and, eq, isNull, lt, ne, or, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/d1";
 import { alias } from "drizzle-orm/sqlite-core";
@@ -13,7 +14,7 @@ import sendEmail from "$lib/email/util";
 import sendPush from "$lib/push";
 import i18nit from "$i18n";
 
-const env = import.meta.env;
+const ENV = import.meta.env;
 
 export const comment = {
 	// Action to create a new comment or edit an existing one
@@ -57,7 +58,7 @@ export const comment = {
 						method: "POST",
 						headers: { "Content-Type": "application/json" },
 						body: JSON.stringify({
-							secret: env.CLOUDFLARE_TURNSTILE_SECRET_KEY,
+							secret: ENV.CLOUDFLARE_TURNSTILE_SECRET_KEY,
 							response: passer.captcha,
 							remoteip: ip
 						})
@@ -73,7 +74,7 @@ export const comment = {
 
 			// Apply rate limiting to prevent spam
 			// Use drifter ID for authenticated users, clientAddress for unauthenticated users
-			const { success } = await locals.runtime.env.COMMENT_LIMIT.limit({ key: drifter ?? ip ?? "unknown" });
+			const { success } = await env.COMMENT_LIMIT.limit({ key: drifter ?? ip ?? "unknown" });
 			if (!success) throw new ActionError({ code: "TOO_MANY_REQUESTS" });
 
 			if (content.length > Number(config.comment?.["max-length"])) throw new ActionError({ code: "CONTENT_TOO_LARGE" });
@@ -82,7 +83,7 @@ export const comment = {
 			const id = enhash(content + reply).substring(0, 8);
 
 			// Initialize database connection
-			const db = drizzle(locals.runtime.env.DB);
+			const db = drizzle(env.DB);
 
 			// Insert the new comment
 			await db.insert(Comment).values({ id, section, item, reply, drifter, nickname: passer?.nickname, timestamp: new Date(), content });
@@ -199,7 +200,7 @@ export const comment = {
 								text: t("reply.text", { content: title, reply: content, link }),
 								unsubscribe: true
 							});
-						} else if (env.AUTHOR_ID && drifter !== env.AUTHOR_ID) {
+						} else if (ENV.AUTHOR_ID && drifter !== ENV.AUTHOR_ID) {
 							const Commenter = alias(Drifter, "commenter");
 
 							// Notify site author of new comment
@@ -214,7 +215,7 @@ export const comment = {
 								.from(Email)
 								.innerJoin(Drifter, eq(Email.drifter, Drifter.id))
 								.leftJoin(Commenter, drifter ? eq(Commenter.id, drifter) : sql`FALSE`)
-								.where(and(eq(Drifter.id, env.AUTHOR_ID), eq(Email.state, "verified"), eq(Email.notify, true)))
+								.where(and(eq(Drifter.id, ENV.AUTHOR_ID), eq(Email.state, "verified"), eq(Email.notify, true)))
 								.get();
 
 							if (!result?.email) return;
@@ -249,7 +250,7 @@ export const comment = {
 			id: z.string(), // The comment ID to edit
 			content: z.string() // New content for the comment
 		}),
-		handler: async ({ id, content }, { cookies, locals }) => {
+		handler: async ({ id, content }, { cookies }) => {
 			// Check if authenticated commenting is enabled
 			if (!oauth.length) throw new ActionError({ code: "FORBIDDEN" });
 
@@ -258,7 +259,7 @@ export const comment = {
 			if (!drifter) throw new ActionError({ code: "UNAUTHORIZED" });
 
 			// Initialize database connection
-			const db = drizzle(locals.runtime.env.DB);
+			const db = drizzle(env.DB);
 
 			// Store the original comment in the history table
 			const inserted = await db
@@ -293,7 +294,7 @@ export const comment = {
 	// Action to delete a comment (marks it as edited by itself)
 	delete: defineAction({
 		input: z.string(), // The comment ID to delete
-		handler: async (id, { cookies, locals }) => {
+		handler: async (id, { cookies }) => {
 			// Check if authenticated commenting is enabled
 			if (!oauth.length) throw new ActionError({ code: "FORBIDDEN" });
 
@@ -302,7 +303,7 @@ export const comment = {
 			if (!drifter) throw new ActionError({ code: "UNAUTHORIZED" });
 
 			// Initialize database connection
-			const db = drizzle(locals.runtime.env.DB);
+			const db = drizzle(env.DB);
 
 			// Mark the comment as deleted by setting edit field to its own ID
 			// This creates a self-reference indicating deletion while preserving the record
@@ -316,9 +317,9 @@ export const comment = {
 	// Action to retrieve the edit history of a comment
 	history: defineAction({
 		input: z.string(), // The comment ID to get history for
-		handler: async (id, { locals }) => {
+		handler: async id => {
 			// Initialize database connection
-			const db = drizzle(locals.runtime.env.DB);
+			const db = drizzle(env.DB);
 
 			// Fetch all history entries for this comment
 			const history = await db
@@ -342,12 +343,12 @@ export const comment = {
 			section: z.string(), // The section this comment belongs to
 			item: z.string() // The item ID to get comments for
 		}),
-		handler: async ({ section, item }, { locals }) => {
+		handler: async ({ section, item }) => {
 			// Get the site author ID
-			const author = env.AUTHOR_ID ?? null;
+			const author = ENV.AUTHOR_ID ?? null;
 
 			// Initialize database connection
-			const db = drizzle(locals.runtime.env.DB);
+			const db = drizzle(env.DB);
 
 			// Fetch all comments with user information
 			const comments = await db

@@ -1,5 +1,6 @@
 import { defineAction } from "astro:actions";
-import { z } from "astro:schema";
+import { z } from "astro/zod";
+import { env } from "cloudflare:workers";
 import { and, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/d1";
 import { PushSubscription } from "$db/schema";
@@ -8,13 +9,13 @@ export const push = {
 	// Action to subscribe to push notifications
 	subscribe: defineAction({
 		input: z.object({
-			endpoint: z.string().url(), // Push service endpoint URL
+			endpoint: z.url(), // Push service endpoint URL
 			p256dh: z.string(), // Public key for encryption
 			auth: z.string() // Authentication secret for encryption
 		}),
-		handler: async ({ endpoint, p256dh, auth }, { locals }) => {
+		handler: async ({ endpoint, p256dh, auth }) => {
 			// Initialize database connection
-			const db = drizzle(locals.runtime.env.DB);
+			const db = drizzle(env.DB);
 
 			// Insert new push subscription
 			// Use onConflictDoNothing to handle duplicate subscriptions gracefully
@@ -36,10 +37,10 @@ export const push = {
 
 	// Action to unsubscribe a push notification
 	unsubscribe: defineAction({
-		input: z.string().url(), // Push service endpoint URL to remove
-		handler: async (endpoint, { locals }) => {
+		input: z.url(), // Push service endpoint URL to remove
+		handler: async endpoint => {
 			// Initialize database connection
-			const db = drizzle(locals.runtime.env.DB);
+			const db = drizzle(env.DB);
 
 			// Delete the specific notification subscription
 			await db.delete(PushSubscription).where(eq(PushSubscription.endpoint, endpoint));
@@ -48,10 +49,10 @@ export const push = {
 
 	// Action to check if a user is subscribed to notifications for a specific endpoint
 	check: defineAction({
-		input: z.string().url(), // Push service endpoint URL to check
-		handler: async (endpoint, { locals }) => {
+		input: z.url(), // Push service endpoint URL to check
+		handler: async endpoint => {
 			// Initialize database connection
-			const db = drizzle(locals.runtime.env.DB);
+			const db = drizzle(env.DB);
 
 			// Query for existing subscription matching user and endpoint
 			const subscription = await db

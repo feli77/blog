@@ -1,5 +1,42 @@
 # Changelog
 
+## [0.41.1](https://github.com/tuyuritio/astro-theme-thought-lite/compare/v0.41.0...v0.41.1) (2026-05-25)
+
+
+### Bug Fixes
+
+* **i18n:** simplify locale URL handling ([7000be5](https://github.com/tuyuritio/astro-theme-thought-lite/commit/7000be530d1efbeb6de46d2bf5f90c34ee56e9d0))
+
+
+### Miscellaneous Chores
+
+* **dependencies:** update packages ([696298d](https://github.com/tuyuritio/astro-theme-thought-lite/commit/696298de68cb61a6cd8e6555518c6e15ec8028b1))
+* **dependencies:** update packages ([09c6875](https://github.com/tuyuritio/astro-theme-thought-lite/commit/09c68750df63b27165a5284b5893c207d2c46b12))
+
+## [0.41.0](https://github.com/tuyuritio/astro-theme-thought-lite/compare/v0.40.1...v0.41.0) (2026-05-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to astro 6
+
+### Bug Fixes
+
+* **i18n:** eliminate client-side dynamic i18n hydration ([cf97e95](https://github.com/tuyuritio/astro-theme-thought-lite/commit/cf97e9555009414bd09e579a8868cbb032d6166c))
+
+
+### Miscellaneous Chores
+
+* standardize compilerOptions ([ea49b1c](https://github.com/tuyuritio/astro-theme-thought-lite/commit/ea49b1c9eefdbc52acb18aea77d35c442ea4d0c8))
+* upgrade to astro 6 ([e6e96a8](https://github.com/tuyuritio/astro-theme-thought-lite/commit/e6e96a8fae0c755e6a3705ab3240960fd979535d))
+
+## [0.40.1](https://github.com/tuyuritio/astro-theme-thought-lite/compare/v0.40.0...v0.40.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* **style:** adjust z-index ([7dc66c7](https://github.com/tuyuritio/astro-theme-thought-lite/commit/7dc66c7e7997e963c605818b48e51a320f191d9b))
+
 ## [0.40.0](https://github.com/tuyuritio/astro-theme-thought-lite/compare/v0.39.0...v0.40.0) (2026-04-26)
 
 
