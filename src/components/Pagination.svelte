@@ -42,9 +42,12 @@ footer {
 
 		transition: color 0.15s ease-in-out;
 
-		&:hover,
-		&.location {
+		&:hover {
 			color: var(--primary-color);
+		}
+
+		&.location {
+			color: var(--accent-color);
 		}
 	}
 }

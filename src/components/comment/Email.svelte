@@ -99,7 +99,7 @@ async function remove() {
 		<h2>{t("email.remove.name")}</h2>
 		<section class="flex gap-5">
 			<button class="form-button" onclick={() => (removeView = false)}>{t("cancel")}</button>
-			<button class="form-button bg-red-500 text-white" onclick={remove}>{t("confirm")}</button>
+			<button class="form-button bg-danger text-background enabled:hover:bg-danger" onclick={remove}>{t("confirm")}</button>
 		</section>
 	</div>
 </Modal>

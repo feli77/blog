@@ -35,7 +35,7 @@
 			transition: text-decoration-color 0.15s ease-in-out;
 
 			&:hover {
-				text-decoration-color: currentColor;
+				text-decoration-color: var(--accent-color);
 			}
 
 			&[target="_blank"]::after {
@@ -133,8 +133,12 @@
 						transform: rotate(-45deg);
 					}
 
-					&:checked::before {
-						border-color: var(--color-primary);
+					&:checked {
+						border-color: var(--accent-color);
+
+						&::before {
+							border-color: var(--accent-color);
+						}
 					}
 				}
 			}

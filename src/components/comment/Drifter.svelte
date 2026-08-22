@@ -87,7 +87,7 @@ async function deactivate() {
 		</div>
 		<section class="flex gap-5">
 			<button class="form-button" onclick={() => (deactivateView = false)}>{t("drifter.deactivate.cancel")}</button>
-			<button class="form-button bg-red-500 text-white" onclick={deactivate}>{t("drifter.deactivate.confirm")}</button>
+			<button class="form-button bg-danger text-background enabled:hover:bg-danger" onclick={deactivate}>{t("drifter.deactivate.confirm")}</button>
 		</section>
 	</div>
 </Modal>
@@ -106,7 +106,7 @@ async function deactivate() {
 					{drifter.name}
 					<button onclick={synchronize}><Icon name="lucide--refresh-cw" title={t("drifter.sync.name")} /></button>
 					<button onclick={() => (location.href = "/@/depart")}><Icon name="lucide--log-out" title={t("drifter.signout")} /></button>
-					<button onclick={() => (deactivateView = true)} class="ms-auto text-red-500"><Icon name="lucide--user-round-x" title={t("drifter.deactivate.name")} /></button>
+					<button onclick={() => (deactivateView = true)} class="ms-auto text-danger"><Icon name="lucide--user-round-x" title={t("drifter.deactivate.name")} /></button>
 				</menu>
 				{#if drifter.description}<span class="text-sm">{drifter.description}</span>{/if}
 			</aside>

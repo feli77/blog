@@ -118,47 +118,9 @@ $effect(() => {
 			<h4>{t("jotting.tag")}</h4>
 			<p>
 				{#each tagList as tag (tag)}
-					<button class:selected={tags.includes(tag)} onclick={() => switchTag(tag)}>{tag}</button>
+					<button class:selected={tags.includes(tag)} onclick={() => switchTag(tag)} class="filter-button">{tag}</button>
 				{/each}
 			</p>
 		</section>
 	</aside>
 </main>
-
-<style>
-aside {
-	section {
-		display: flex;
-		flex-direction: column;
-		gap: 5px;
-
-		p {
-			display: flex;
-			flex-direction: row;
-			flex-wrap: wrap;
-			gap: 5px;
-
-			button {
-				border-bottom: 1px solid var(--primary-color);
-				padding: 0rem 0.35rem;
-				font-size: 0.9rem;
-				transition:
-					color 0.1s ease-in-out,
-					background-color 0.1s ease-in-out;
-
-				&.selected {
-					color: var(--background-color);
-					background-color: var(--primary-color);
-				}
-
-				@media (min-width: 640px) {
-					&:hover {
-						color: var(--background-color);
-						background-color: var(--primary-color);
-					}
-				}
-			}
-		}
-	}
-}
-</style>

@@ -362,7 +362,7 @@ onMount(() => {
 				{/if}
 
 				{#if context.push}
-					<button onclick={toggleSubscription}>
+					<button onclick={toggleSubscription} class:text-accent={context.subscription !== undefined} class="transition-colors">
 						{#if context.subscription !== undefined}
 							<Icon name="lucide--bell" title={t("push.enable.name")} />
 						{:else}
@@ -371,7 +371,7 @@ onMount(() => {
 					</button>
 				{/if}
 
-				<button id="submit" disabled={limit > 0 || (!context.drifter && !captcha) || overlength} onclick={submit}>
+				<button id="submit" disabled={limit > 0 || (!context.drifter && !captcha) || overlength} onclick={submit} class="rounded p-1 transition-colors enabled:hover:text-background enabled:hover:bg-accent">
 					{#if limit > 0}
 						<span class="flex gap-0.5"><Icon name="lucide--timer" /><span class="relative top-0.5 text-sm font-mono leading-none">{Math.ceil(limit)}</span></span>
 					{:else if !context.drifter && !captcha}

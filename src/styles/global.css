@@ -160,6 +160,7 @@ input[type="checkbox"].switch {
 	color: inherit;
 	display: inline-flex;
 	align-items: center;
+	transition: color 0.15s ease-in;
 
 	&::before {
 		position: absolute;
@@ -185,10 +186,14 @@ input[type="checkbox"].switch {
 		border-top: 2px solid currentColor;
 	}
 
-	&:checked::before {
-		inset-inline-start: 0.9rem;
-		border-width: 0.45rem;
-		background-color: currentColor;
+	&:checked {
+		color: var(--accent-color);
+
+		&::before {
+			inset-inline-start: 0.9rem;
+			border-width: 0.45rem;
+			background-color: currentColor;
+		}
 	}
 }
 
@@ -305,7 +310,7 @@ input[type="checkbox"].switch {
 	}
 
 	.link {
-		@apply underline decoration-transparent decoration-[0.05em] underline-offset-[0.15em] transition-[text-decoration-color] hover:decoration-current;
+		@apply underline decoration-transparent decoration-[0.05em] underline-offset-[0.15em] transition-[text-decoration-color] hover:decoration-accent;
 	}
 
 	.input {
@@ -313,7 +318,28 @@ input[type="checkbox"].switch {
 	}
 
 	.form-button {
-		@apply m-auto rounded py-1 px-2 text-background bg-secondary;
+		@apply m-auto rounded py-1 px-2 text-background bg-secondary transition-colors enabled:hover:bg-accent;
+	}
+
+	.filter-button {
+		border-bottom: 1px solid var(--primary-color);
+		padding: 0 0.35rem;
+		font-size: 0.9rem;
+		transition:
+			color 0.1s ease-in-out,
+			background-color 0.1s ease-in-out;
+
+		&.selected {
+			color: var(--background-color);
+			background-color: var(--accent-color);
+		}
+
+		@media (min-width: 640px) {
+			&:hover {
+				color: var(--background-color);
+				background-color: var(--accent-color);
+			}
+		}
 	}
 
 	.pop {
