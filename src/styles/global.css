@@ -23,6 +23,11 @@
 	--block-color: #ccd0da;
 	--shadow-color: #bcc0cc;
 	--selection-color: #dc8a78;
+	--alert-note-color: #1e66f5;
+	--alert-tip-color: #40a02b;
+	--alert-important-color: #8839ef;
+	--alert-warning-color: #df8e1d;
+	--alert-caution-color: #d20f39;
 
 	--swup-fade-theme-duration: 0.15s;
 
@@ -40,6 +45,11 @@
 	--block-color: #313244;
 	--shadow-color: #45475a;
 	--selection-color: #585b70;
+	--alert-note-color: #89b4fa;
+	--alert-tip-color: #a6e3a1;
+	--alert-important-color: #cba6f7;
+	--alert-warning-color: #f9e2af;
+	--alert-caution-color: #f38ba8;
 
 	.astro-code,
 	.astro-code span {

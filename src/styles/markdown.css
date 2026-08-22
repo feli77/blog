@@ -331,23 +331,23 @@
 
 		/* GitHub-style alerts */
 		.markdown-alert-note {
-			--alert-color: var(--secondary-color);
+			--alert-color: var(--alert-note-color);
 		}
 
 		.markdown-alert-tip {
-			--alert-color: #48a131;
+			--alert-color: var(--alert-tip-color);
 		}
 
 		.markdown-alert-important {
-			--alert-color: #3366cc;
+			--alert-color: var(--alert-important-color);
 		}
 
 		.markdown-alert-warning {
-			--alert-color: #bf8700;
+			--alert-color: var(--alert-warning-color);
 		}
 
 		.markdown-alert-caution {
-			--alert-color: #ee3838;
+			--alert-color: var(--alert-caution-color);
 		}
 
 		.markdown-alert-note,
