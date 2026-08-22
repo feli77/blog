@@ -56,7 +56,7 @@ const t = i18nit(locale);
 			</button>
 		)
 	}
-	<button aria-label="Scroll to Comments" onclick="document.querySelector('#comment-section')?.scrollIntoView({behavior: 'smooth'})">
+	<button aria-label="Scroll to Comments" class="border-accent" onclick="document.querySelector('#comment-section')?.scrollIntoView({behavior: 'smooth'})">
 		<Icon name="lucide--message-square" size={15} title={t("note.comment")} />
 	</button>
 </figure>

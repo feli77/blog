@@ -112,7 +112,7 @@ if (headings) {
 					<nav class="overflow-y-auto">
 						<ul class="flex flex-col text-base list-none">
 							{headings.map((heading: Heading) => (
-								<li id={`indicator-${heading.slug}`} class="group relative flex items-stretch h-6 [&.indicate>a]:font-bold [&.indicate>a]:text-accent">
+								<li id={`indicator-${heading.slug}`} class="group relative flex items-stretch h-6 [&.indicate>a]:font-bold [&.indicate>a]:text-primary">
 									<div class="flex select-none" aria-hidden="true">
 										{heading.lines?.map(line => (
 											<div class="w-4 relative flex justify-center">{line && <span class="absolute top-0 bottom-0 border-s border-secondary" />}</div>
@@ -142,7 +142,7 @@ if (headings) {
 					<h4>{t("note.series")}</h4>
 					<ul class="flex flex-col text-sm gap-0.5">
 						{series.map(item => (
-							<li class:list={["flex items-center gap-1.25 before:w-1 before:h-1 before:rounded-full", item.current ? "font-bold text-accent before:bg-accent" : "text-weak before:bg-weak"]}>
+							<li class:list={["flex items-center gap-1.25 before:w-1 before:h-1 before:rounded-full", item.current ? "font-bold text-primary before:bg-primary" : "text-weak before:bg-weak"]}>
 								<a href={item.url} title={item.title} class="truncate hover:font-bold hover:text-primary transition-[color,font-weight]">
 									{item.title}
 								</a>
