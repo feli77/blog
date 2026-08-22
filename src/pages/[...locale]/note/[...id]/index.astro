@@ -88,8 +88,8 @@ const t = i18nit(locale);
 
 		<Sensitive {locale} back={getRelativeLocaleUrl(locale, "/note")} sensitive={note.data.sensitive} client:load>
 			<div class="contents">
-				<div class="flex gap-5">
-					<section id="markdown-content" class="markdown"><Content /></section>
+				<div class="relative">
+					<section id="markdown-content" class="markdown min-w-0"><Content /></section>
 					{(note.data.toc || !!note.data.series) && <TOC headings={note.data.toc ? headings : undefined} {locale} {series} />}
 				</div>
 				<blockquote id="comment-section"><Comments {locale} link={`${Astro.url.origin}${Astro.url.pathname}`} section="note" item={note.id} /></blockquote>

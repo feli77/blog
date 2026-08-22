@@ -73,13 +73,47 @@ if (headings) {
 			background-color: #aaaaaa88;
 		}
 	}
+
+	#toc-panel {
+		height: 100%;
+	}
+
+	/* Keep the article at its normal width and place the TOC in the
+	 * free space beside it once the viewport can accommodate both. */
+	@media screen and (min-width: 1440px) {
+		#toc {
+			position: absolute;
+			inset-inline-start: calc(100% + 1.25rem);
+			inset-inline-end: auto;
+			top: 0;
+			display: block;
+			width: 12.5rem;
+			height: 100%;
+			padding: 0;
+			background-color: transparent;
+			overflow: visible;
+			transform: none;
+			transition: none;
+		}
+
+		#toc-overlay,
+		#toc-close {
+			display: none;
+		}
+
+		#toc-panel {
+			position: sticky;
+			top: 0.75rem;
+			height: auto;
+		}
+	}
 </style>
 
-<div id="toc-overlay" aria-hidden="true" class="sm:hidden fixed top-0 inset-s-0 w-screen h-screen transition-[background-color] max-sm:z-160"></div>
+<div id="toc-overlay" aria-hidden="true" class="fixed top-0 inset-s-0 w-screen h-screen transition-[background-color] z-160"></div>
 
-<aside id="toc" class="sm:contents fixed top-0 inset-e-0 flex flex-col items-start gap-2 p-5 bg-background h-full overflow-hidden transition-transform max-sm:z-200">
-	<button id="toc-close" class="sm:hidden"><Icon name="lucide--x" /></button>
-	<div class="sm:sticky self-start shrink-0 top-3 w-50 flex flex-col gap-7.5 max-sm:h-full">
+<aside id="toc" class="fixed top-0 inset-e-0 flex flex-col items-start gap-2 p-5 bg-background h-full overflow-hidden transition-transform z-200">
+	<button id="toc-close"><Icon name="lucide--x" /></button>
+	<div id="toc-panel" class="self-start shrink-0 w-50 flex flex-col gap-7.5">
 		{
 			headings && (
 				<section>
