@@ -39,6 +39,6 @@ onMount(() => {
 	{@const isActive = active(item.path, item.extra)}
 	<a href={item.path} onclick={handleClose} class="relative inline-flex items-center group" class:max-sm:font-bold={isActive}>
 		<span class="sm:absolute sm:w-full h-full inline-flex items-center sm:justify-center sm:border-b-2 sm:py-1 transition-[border-color] duration-150 ease-linear" class:border-transparent={!isActive} class:border-accent={isActive}><Icon name={item.icon} /></span>
-		<p class="w-full sm:py-1 px-2.5 sm:text-center sm:text-background sm:bg-primary sm:clip-path-hidden transition-[clip-path] group-hover:clip-path-visible">{item.label}</p>
+		<p class="w-full sm:py-1 px-2.5 sm:text-center sm:text-background sm:bg-accent sm:clip-path-hidden transition-[clip-path] group-hover:clip-path-visible">{item.label}</p>
 	</a>
 {/each}
