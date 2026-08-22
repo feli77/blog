@@ -10,9 +10,6 @@
 	--block-color: #e6e9ef;
 	--shadow-color: #bcc0cc;
 	--accent-color: #8839ef;
-	--info-color: #1e66f5;
-	--success-color: #40a02b;
-	--warning-color: #df8e1d;
 	--danger-color: #d20f39;
 
 	.astro-code,
@@ -32,9 +29,6 @@
 	--block-color: #181825;
 	--shadow-color: #45475a;
 	--accent-color: #cba6f7;
-	--info-color: #89b4fa;
-	--success-color: #a6e3a1;
-	--warning-color: #f9e2af;
 	--danger-color: #f38ba8;
 
 	.astro-code,
@@ -46,4 +40,22 @@
 
 :root {
 	--backdrop-color: rgb(17 17 27 / 0.55);
+}
+
+.markdown {
+	/* Catppuccin Latte alerts */
+	--alert-note-color: #1e66f5;
+	--alert-tip-color: #40a02b;
+	--alert-important-color: #8839ef;
+	--alert-warning-color: #df8e1d;
+	--alert-caution-color: #d20f39;
+}
+
+[data-theme="dark"] .markdown {
+	/* Catppuccin Mocha alerts */
+	--alert-note-color: #89b4fa;
+	--alert-tip-color: #a6e3a1;
+	--alert-important-color: #cba6f7;
+	--alert-warning-color: #f9e2af;
+	--alert-caution-color: #f38ba8;
 }

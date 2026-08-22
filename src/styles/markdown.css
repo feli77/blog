@@ -331,23 +331,23 @@
 
 		/* GitHub-style alerts */
 		.markdown-alert-note {
-			--alert-color: var(--info-color);
+			--alert-color: var(--alert-note-color);
 		}
 
 		.markdown-alert-tip {
-			--alert-color: var(--success-color);
+			--alert-color: var(--alert-tip-color);
 		}
 
 		.markdown-alert-important {
-			--alert-color: var(--accent-color);
+			--alert-color: var(--alert-important-color);
 		}
 
 		.markdown-alert-warning {
-			--alert-color: var(--warning-color);
+			--alert-color: var(--alert-warning-color);
 		}
 
 		.markdown-alert-caution {
-			--alert-color: var(--danger-color);
+			--alert-color: var(--alert-caution-color);
 		}
 
 		.markdown-alert-note,
