@@ -57,10 +57,6 @@ const chronicles = Object.entries<string[]>(chronicle ?? {})
 			chronicles.length > 0 && (
 				<aside class="flex flex-col justify-between basis-60 shrink-0">
 					<ul class="list-none relative before:absolute before:content-[''] before:h-full before:top-2 before:border-s-2 before:border-primary after:absolute after:content-[''] after:w-3 after:h-3 after:-bottom-2 after:-inset-s-[0.325rem] after:border-2 after:border-primary after:rounded-full after:bg-primary">
-					<a class="mb-4" href="https://ko-fi.com/I2I51P3NOT" target="_blank">
-						<img height="36" style="border:0;height:36px;" src="https://storage.ko-fi.com/cdn/kofi3.png?v=6" border="0" alt="Buy Me a Coffee at ko-fi.com" />
-					</a>
-					<ul class="list-none relative before:absolute before:content-[''] before:h-full before:top-2 before:border-s-2 before:border-primary after:absolute after:content-[''] after:w-3 after:h-3 after:-bottom-2 after:-start-[0.325rem] after:border-2 after:border-primary after:rounded-full after:bg-primary">
 						{chronicles.map(chronicle => (
 							<li class="relative mb-2 pb-2 ps-3 before:absolute before:content-[''] before:w-3 before:h-3 before:top-2 before:-inset-s-[0.325rem] before:border-2 before:border-primary before:rounded-full before:bg-background">
 								<span class="relative font-mono">{Time.toDateString(chronicle.date)}</span>
