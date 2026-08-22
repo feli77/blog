@@ -1,0 +1,49 @@
+:root,
+[data-theme="light"] {
+	color-scheme: light;
+
+	/* Catppuccin Latte */
+	--primary-color: #4c4f69;
+	--secondary-color: #5c5f77;
+	--weak-color: #8c8fa1;
+	--background-color: #eff1f5;
+	--block-color: #e6e9ef;
+	--shadow-color: #bcc0cc;
+	--accent-color: #8839ef;
+	--info-color: #1e66f5;
+	--success-color: #40a02b;
+	--warning-color: #df8e1d;
+	--danger-color: #d20f39;
+
+	.astro-code,
+	.astro-code span {
+		background-color: var(--block-color) !important;
+	}
+}
+
+[data-theme="dark"] {
+	color-scheme: dark;
+
+	/* Catppuccin Mocha */
+	--primary-color: #cdd6f4;
+	--secondary-color: #bac2de;
+	--weak-color: #7f849c;
+	--background-color: #1e1e2e;
+	--block-color: #181825;
+	--shadow-color: #45475a;
+	--accent-color: #cba6f7;
+	--info-color: #89b4fa;
+	--success-color: #a6e3a1;
+	--warning-color: #f9e2af;
+	--danger-color: #f38ba8;
+
+	.astro-code,
+	.astro-code span {
+		color: var(--shiki-dark) !important;
+		background-color: var(--shiki-dark-bg) !important;
+	}
+}
+
+:root {
+	--backdrop-color: rgb(17 17 27 / 0.55);
+}

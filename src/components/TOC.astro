@@ -64,16 +64,6 @@ if (headings) {
 		}
 	}
 
-	#toc-overlay {
-		pointer-events: none;
-		background-color: transparent;
-
-		&.active {
-			pointer-events: auto;
-			background-color: #aaaaaa88;
-		}
-	}
-
 	#toc-panel {
 		height: 100%;
 	}
@@ -109,7 +99,7 @@ if (headings) {
 	}
 </style>
 
-<div id="toc-overlay" aria-hidden="true" class="fixed top-0 inset-s-0 w-screen h-screen transition-[background-color] z-160"></div>
+<div id="toc-overlay" aria-hidden="true" class="page-overlay fixed top-0 inset-s-0 w-screen h-screen transition-[background-color] z-160"></div>
 
 <aside id="toc" class="fixed top-0 inset-e-0 flex flex-col items-start gap-2 p-5 bg-background h-full overflow-hidden transition-transform z-200">
 	<button id="toc-close"><Icon name="lucide--x" /></button>
