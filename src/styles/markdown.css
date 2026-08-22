@@ -1,5 +1,12 @@
 @layer components {
 	.markdown {
+		/* Catppuccin Latte alert palette (light/default) */
+		--alert-note-color: #1e66f5;
+		--alert-tip-color: #40a02b;
+		--alert-important-color: #8839ef;
+		--alert-warning-color: #df8e1d;
+		--alert-caution-color: #d20f39;
+
 		line-height: 1.75;
 		word-wrap: break-word;
 		user-select: text;
@@ -398,5 +405,14 @@
 				text-align: inherit;
 			}
 		}
+	}
+
+	[data-theme="dark"] .markdown {
+		/* Catppuccin Mocha alert palette */
+		--alert-note-color: #89b4fa;
+		--alert-tip-color: #a6e3a1;
+		--alert-important-color: #cba6f7;
+		--alert-warning-color: #f9e2af;
+		--alert-caution-color: #f38ba8;
 	}
 }
