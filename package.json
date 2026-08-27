@@ -33,7 +33,7 @@
 		"check": "astro check",
 		"build": "astro build",
 		"preview": "wrangler dev",
-		"types": "wrangler types",
+		"types": "WRANGLER_HIDE_BANNER=true wrangler types",
 		"format": "biome format --write",
 		"lint": "biome lint",
 		"deploy": "wrangler deploy",
