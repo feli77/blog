@@ -2,8 +2,8 @@ about:
   introduction: ○○紹介
   linkroll: ○○連結
   siteInfo:
-    heading: このサイトをリンク集に追加
-    hint: 各行をクリックすると、その内容をコピーできます。
+    heading: サイト情報
+    hint: リンク集への追加を歓迎します。いずれかのコメント欄にメッセージをお寄せください。
     name: サイト名
     url: URL
     favicon: Favicon

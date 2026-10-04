@@ -2,8 +2,8 @@ about:
   introduction: Introduction
   linkroll: Linkroll
   siteInfo:
-    heading: Add this site to your linkroll
-    hint: Click a row to copy its value.
+    heading: Site information
+    hint: You're welcome to add this site to your linkroll. Please leave a comment in any comment section.
     name: Site name
     url: URL
     favicon: Favicon

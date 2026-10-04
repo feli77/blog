@@ -2,8 +2,8 @@ about:
   introduction: 我是...
   linkroll: 友链
   siteInfo:
-    heading: 添加本站友链
-    hint: 点击任意一行即可复制对应内容。
+    heading: 本站信息
+    hint: 欢迎添加友链，请在任意评论区留言
     name: 网站名
     url: 链接
     favicon: Favicon
