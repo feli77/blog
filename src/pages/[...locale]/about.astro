@@ -4,6 +4,7 @@ import config, { monolocale } from "$config";
 import Time from "$lib/time";
 import Base from "$layouts/Base.astro";
 import i18nit from "$i18n";
+import SiteInfo from "$components/SiteInfo.svelte";
 
 export async function getStaticPaths() {
 	// Create path for each locale, omitting default locale from URL
@@ -37,6 +38,22 @@ const chronicles = Object.entries<string[]>(chronicle ?? {})
 						<h2 class="mb-4">{t("about.introduction")}</h2>
 						<div class="markdown">
 							<Introduction />
+							<SiteInfo
+								client:load
+								fields={[
+									{ label: t("about.siteInfo.name"), value: config.title },
+									{ label: t("about.siteInfo.url"), value: Astro.site!.href },
+									{ label: t("about.siteInfo.favicon"), value: new URL("/favicon.svg", Astro.site).href },
+									{ label: t("about.siteInfo.description"), value: config.description }
+								]}
+								messages={{
+									heading: t("about.siteInfo.heading"),
+									hint: t("about.siteInfo.hint"),
+									copy: t("about.siteInfo.copy"),
+									copied: t("about.siteInfo.copied"),
+									failure: t("about.siteInfo.failure")
+								}}
+							/>
 						</div>
 					</div>
 				)

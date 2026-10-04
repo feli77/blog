@@ -1,6 +1,16 @@
 about:
   introduction: ○○紹介
   linkroll: ○○連結
+  siteInfo:
+    heading: このサイトをリンク集に追加
+    hint: 各行をクリックすると、その内容をコピーできます。
+    name: サイト名
+    url: URL
+    favicon: Favicon
+    description: 紹介文
+    copy: コピー
+    copied: コピーしました
+    failure: コピーできませんでした。テキストを選択して手動でコピーしてください。
 cancel: 取消
 comment:
   author: 筆者

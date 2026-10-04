@@ -1,6 +1,16 @@
 about:
   introduction: 我是...
   linkroll: 友鏈
+  siteInfo:
+    heading: 新增本站友鏈
+    hint: 點擊任意一列即可複製對應內容。
+    name: 網站名稱
+    url: 連結
+    favicon: Favicon
+    description: 簡介
+    copy: 複製
+    copied: 已複製
+    failure: 複製失敗，請選取文字後手動複製。
 cancel: 取消
 comment:
   author: 筆者

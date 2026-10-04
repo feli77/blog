@@ -1,6 +1,16 @@
 about:
   introduction: Introduction
   linkroll: Linkroll
+  siteInfo:
+    heading: Add this site to your linkroll
+    hint: Click a row to copy its value.
+    name: Site name
+    url: URL
+    favicon: Favicon
+    description: Description
+    copy: Copy
+    copied: Copied
+    failure: Couldn't copy. Please select the text and copy it manually.
 cancel: Cancel
 comment:
   author: Author

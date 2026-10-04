@@ -1,6 +1,16 @@
 about:
   introduction: 我是...
   linkroll: 友链
+  siteInfo:
+    heading: 添加本站友链
+    hint: 点击任意一行即可复制对应内容。
+    name: 网站名
+    url: 链接
+    favicon: Favicon
+    description: 简介
+    copy: 复制
+    copied: 已复制
+    failure: 复制失败，请选中文字手动复制。
 cancel: 取消
 comment:
   author: 笔者
