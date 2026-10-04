@@ -1,6 +1,5 @@
 import siteConfig, { providers } from "./src/lib/config";
 
-// @ts-expect-error
 const env = import.meta.env ?? {};
 
 const config = siteConfig({
