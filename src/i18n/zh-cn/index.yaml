@@ -3,7 +3,8 @@ about:
   linkroll: 友链
   siteInfo:
     heading: 本站信息
-    hint: 欢迎添加友链，请在任意评论区留言
+    hint: 欢迎添加友链。请在{board}下留言。
+    board: 留言板
     name: 网站名
     url: 链接
     favicon: Favicon

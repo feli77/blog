@@ -3,7 +3,8 @@ about:
   linkroll: ○○連結
   siteInfo:
     heading: サイト情報
-    hint: リンク集への追加を歓迎します。いずれかのコメント欄にメッセージをお寄せください。
+    hint: リンク集への追加を歓迎します。{board}にコメントをお寄せください。
+    board: ゲストブック
     name: サイト名
     url: URL
     favicon: Favicon

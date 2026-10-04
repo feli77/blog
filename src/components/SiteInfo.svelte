@@ -3,16 +3,19 @@ import Icon from "$components/Icon.svelte";
 
 interface Props {
 	fields: Array<{ label: string; value: string }>;
+	boardUrl: string;
 	messages: {
 		heading: string;
 		hint: string;
+		board: string;
 		copy: string;
 		copied: string;
 		failure: string;
 	};
 }
 
-let { fields, messages }: Props = $props();
+let { fields, boardUrl, messages }: Props = $props();
+let hint = $derived(messages.hint.split("{board}"));
 let copied = $state<number | null>(null);
 let status = $state("");
 
@@ -31,7 +34,7 @@ async function copy(index: number) {
 
 <div class="flex flex-col gap-2 mt-4 min-w-0">
 	<h3>{messages.heading}</h3>
-	<p>{messages.hint}</p>
+	<p>{hint[0]}<a href={boardUrl}>{messages.board}</a>{hint[1]}</p>
 	<div class="flex flex-col gap-2">
 		{#each fields as field, index}
 			<button type="button" onclick={() => copy(index)} aria-label={`${messages.copy}: ${field.label}, ${field.value}`} class="group/site-info w-full items-center gap-3 text-start">
@@ -43,5 +46,5 @@ async function copy(index: number) {
 			</button>
 		{/each}
 	</div>
-	<p role="status" aria-live="polite" aria-atomic="true" class="min-h-6 text-sm text-secondary">{status}</p>
+	<p role="status" aria-live="polite" aria-atomic="true" class="sr-only">{status}</p>
 </div>

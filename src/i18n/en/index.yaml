@@ -3,7 +3,8 @@ about:
   linkroll: Linkroll
   siteInfo:
     heading: Site information
-    hint: You're welcome to add this site to your linkroll. Please leave a comment in any comment section.
+    hint: You're welcome to add this site to your linkroll. Please leave a comment on the {board}.
+    board: Guestbook
     name: Site name
     url: URL
     favicon: Favicon
